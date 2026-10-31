@@ -1,0 +1,17 @@
+Subject: $role | $name, $headline
+
+Hi $company team,
+
+I saw your $role opening ($url) and would like to be considered.
+
+I'm a $headline based in $base_location. A few results that map to this role:
+$highlights
+
+I'm open to $work_mode work, and my notice period is $notice_period. My resume is attached.
+
+Would you be open to a short call?
+
+Best regards,
+$name
+$email
+$links
