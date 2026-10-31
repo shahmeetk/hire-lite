@@ -4,6 +4,20 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-10-31
+
+### Added
+
+- `docs/BOTS.md`: install and first-run steps for Grok Bot, Claude Code, Cursor, and
+  ChatGPT/Codex, including the split between the bot and the sender laptop.
+- Cursor project rule and `/hire-lite` skill.
+
+### Changed
+
+- The dashboard is a single self-contained page with clickable pipeline counts and charts,
+  cross-filters, sortable columns, a per-lead history and evidence panel, and a short
+  next-step note.
+
 ## [0.1.0] - 2026-10-31
 
 ### Added

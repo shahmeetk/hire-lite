@@ -4,7 +4,7 @@
 that print a hiring email; a small zero-LLM CLI validates, de-duplicates, queues and tracks
 every lead in one JSONL ledger; your own laptop sends a fixed, honest email with your fixed
 resume; bounces come back into the ledger. Works with Grok Bot, Claude Code, ChatGPT/Codex
-or Google Antigravity.
+or Google Antigravity. A person can set any of them up from [docs/BOTS.md](docs/BOTS.md).
 
 ![Hire Lite dashboard (synthetic data)](docs/dashboard.png)
 
@@ -36,8 +36,9 @@ record of what was sent. Hire Lite takes the opposite approach:
 - Bounce checker: read-only IMAP scan for delivery-failure notices.
 - One retry per bounce with a published corrected address; a second bounce drops the lead.
 - `report`: at most 10 terse lines (the only thing the agent reads).
-- `dashboard`: one self-contained HTML file with CSS bar charts and a searchable,
-  filterable table. No server, no network, no JavaScript dependencies.
+- `dashboard`: one self-contained HTML file. Click a number, bar, or pipeline chip to
+  filter, click a row for the evidence and status history, sort any column, and read a
+  short "what to do next" note. No server and no network calls.
 - Discovery helper for Hacker News "Who is hiring?" threads (public APIs).
 - Agent adapters for Grok Bot, Claude Code, ChatGPT/Codex and Google Antigravity.
 
@@ -91,14 +92,18 @@ The harvest line format:
  "email_source": "post body", "evidence": "Send your CV to careers@acme.example.com"}
 ```
 
-## Agent setup
+## Use it with a bot
 
-| Agent | Start here |
+The full install for a person, including the first dry run, is [docs/BOTS.md](docs/BOTS.md). Short version:
+
+| You use | What you do |
 |---|---|
-| Grok Bot | [adapters/grok/ROUTINE_PROMPT.md](adapters/grok/ROUTINE_PROMPT.md) and [skill](adapters/grok/skills/hire-lite/SKILL.md) |
-| Claude Code | [CLAUDE.md](CLAUDE.md), then run `/hire-lite-run` |
-| ChatGPT / Codex | [AGENTS.md](AGENTS.md) (read by Codex), [adapters/chatgpt/INSTRUCTIONS.md](adapters/chatgpt/INSTRUCTIONS.md) |
-| Google Antigravity | [.agent/rules/hire-lite.md](.agent/rules/hire-lite.md), [.agent/workflows/hire-lite-run.md](.agent/workflows/hire-lite-run.md) |
+| Grok Bot | Install the app, create a Bot named Hire Lite, paste the prompt in the guide, then add a Mon/Wed/Fri routine |
+| Claude Code | `claude` in this folder, then `/hire-lite-run dry-run` |
+| Cursor | Open this folder and type `/hire-lite` in Agent |
+| ChatGPT / Codex | `codex` in this folder and paste the prompt. The website chat can draft a harvest file; the ledger commands still run here |
+
+The bot finds leads. Your laptop sends them, because that is where the mailbox password stays.
 
 ## Token-cost philosophy
 
@@ -140,9 +145,11 @@ hire_lite/             ledger, rules, report/dashboard, sender, bounce checker, 
 templates/             email.txt (and optional email.html) you edit once
 config.example.yaml    all settings, placeholders only
 AGENTS.md              the agent playbook (all adapters point here)
-CLAUDE.md, .claude/    Claude Code adapter
+docs/BOTS.md           install and first run for Grok Bot, Claude Code, Cursor, ChatGPT
+CLAUDE.md, .claude/    Claude Code adapter and /hire-lite-run
+.cursor/               Cursor rule and /hire-lite skill
 .agent/                Google Antigravity rule + workflow
-adapters/              Grok Bot and ChatGPT adapters, scheduling notes
+adapters/              Grok Bot routine prompt and ChatGPT instructions
 scripts/               hl_send.sh (sender), demo.sh (synthetic dry run), pii_scan.py
 examples/              synthetic harvest file and sample ledger
 docs/                  architecture, ledger schema, sender setup, dashboard screenshot
@@ -151,6 +158,7 @@ tests/                 pytest suite (synthetic data, mocked MX/SMTP)
 
 ## Documentation
 
+- [Bots](docs/BOTS.md): install Grok Bot, Claude Code, Cursor, or ChatGPT, then run a session
 - [Architecture](docs/ARCHITECTURE.md): components, one run, lead status state machine
 - [Ledger schema](docs/LEDGER_SCHEMA.md): fields, statuses, validate rules, file formats
 - [Sender setup](docs/SENDER.md): app passwords, keychain, separate laptop

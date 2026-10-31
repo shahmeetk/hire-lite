@@ -1,14 +1,15 @@
 # Agent adapters
 
-Hire Lite is agent-agnostic. Every adapter is a thin pointer to [`AGENTS.md`](../AGENTS.md),
-which holds the run procedure, hard rules and token rules. Keep adapters short so the
-playbook has one source of truth.
+People start at [`docs/BOTS.md`](../docs/BOTS.md): install, first dry run, and how the bot
+and the sender laptop split the work. The files here are what each product loads. They stay
+short and point at [`AGENTS.md`](../AGENTS.md), which is the only copy of the run procedure.
 
-| Agent | Files | How it is used |
+| Agent | Files | How a person starts |
 |---|---|---|
-| Grok Bot | [`grok/ROUTINE_PROMPT.md`](grok/ROUTINE_PROMPT.md), [`grok/skills/hire-lite/SKILL.md`](grok/skills/hire-lite/SKILL.md) | Paste the routine prompt into a scheduled task; add the skill if your setup supports skills |
-| Claude Code | [`CLAUDE.md`](../CLAUDE.md), [`.claude/commands/hire-lite-run.md`](../.claude/commands/hire-lite-run.md) | Loaded automatically in the repo; run `/hire-lite-run` |
-| ChatGPT / Codex | [`AGENTS.md`](../AGENTS.md), [`chatgpt/INSTRUCTIONS.md`](chatgpt/INSTRUCTIONS.md) | Codex reads `AGENTS.md`; for a custom GPT or chat with code tools, paste the instructions |
+| Grok Bot | [`grok/ROUTINE_PROMPT.md`](grok/ROUTINE_PROMPT.md), [`grok/skills/hire-lite/SKILL.md`](grok/skills/hire-lite/SKILL.md) | Create a Bot, paste the routine, save the skill |
+| Claude Code | [`CLAUDE.md`](../CLAUDE.md), [`.claude/commands/hire-lite-run.md`](../.claude/commands/hire-lite-run.md) | `claude`, then `/hire-lite-run` |
+| Cursor | [`.cursor/rules/hire-lite.mdc`](../.cursor/rules/hire-lite.mdc), [`.cursor/skills/hire-lite/SKILL.md`](../.cursor/skills/hire-lite/SKILL.md) | Open the folder, type `/hire-lite` |
+| ChatGPT / Codex | [`AGENTS.md`](../AGENTS.md), [`chatgpt/INSTRUCTIONS.md`](chatgpt/INSTRUCTIONS.md) | `codex` in this folder, or paste the instructions into chat |
 | Google Antigravity | [`.agent/rules/hire-lite.md`](../.agent/rules/hire-lite.md), [`.agent/workflows/hire-lite-run.md`](../.agent/workflows/hire-lite-run.md) | Workspace rule plus a run workflow |
 
 Agent products change quickly. If your version looks for rules, commands or skills in a
