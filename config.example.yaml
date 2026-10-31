@@ -1,0 +1,94 @@
+# Hire Lite configuration. Copy to config.yaml (git-ignored) and edit.
+# Everything here is a placeholder. Never commit your real config.yaml.
+
+profile:
+  name: "Your Name"
+  email: "you@example.com"          # the mailbox you send from
+  headline: "Senior Platform Engineer"
+  base_location: "Springfield"
+  notice_period: "30 days"
+  phone: ""                         # optional
+  links:
+    - "https://www.linkedin.com/in/your-handle"
+    - "https://your-site.example.com"
+
+targets:
+  # Case-insensitive regexes matched against the role title. Empty list = accept any role.
+  roles:
+    - "platform"
+    - "\\bsre\\b|site reliability"
+    - "devops"
+    - "cloud"
+    - "infrastructure"
+    - "mlops|llmops"
+
+# Lanes in priority order. The FIRST lane is your home region: leads there are never
+# blocked by excluded_locations. Export sends lane 1 first, then lane 2, then lane 3.
+lanes:
+  - name: home
+    keywords: ["springfield", "shelbyville", "exampleland"]
+  - name: remote
+    keywords: ["remote", "wfa", "anywhere", "worldwide"]
+  - name: hybrid
+    keywords: ["hybrid"]
+
+# Onsite locations you will not take (matched against role + location text).
+excluded_locations: ["ogdenville", "north haverbrook"]
+
+# Companies you never email (matched against the normalized company name).
+excluded_companies: ["current employer inc", "former employer llc"]
+
+# Hiring contacts on these domains are skipped (personal mailboxes). Defaults cover the
+# big providers; uncomment to replace the list entirely.
+# free_mail_domains: ["gmail.com", "yahoo.com", "outlook.com"]
+
+# Fixed lines for the email template ($highlights). The sender picks up to 3 whose
+# `match` regex best fits the role. Same facts every time: no per-job tailoring.
+highlights:
+  - match: "platform|kubernetes|devops|developer"
+    text: "Built an internal developer platform used by N engineers"
+  - match: "sre|reliab|observ|incident"
+    text: "Cut mean time to recovery by N% with better alerting and runbooks"
+  - match: "cloud|architect|infra|terraform"
+    text: "Designed multi-account cloud landing zones with infrastructure as code"
+  - match: "ml|ai|llm|data"
+    text: "Ran ML/LLM workloads in production on GPU clusters"
+
+validate:
+  mx_check: true                    # MX lookup over DNS-over-HTTPS
+  mx_resolver: "https://dns.google/resolve"
+  mx_timeout_seconds: 8
+  require_evidence: true            # the hiring email must appear in the evidence snippet
+
+caps:
+  export_max: 30                    # leads per outbox
+  send_max_per_run: 30
+  send_daily_max: 40                # hard ceiling across runs on the sender machine
+  send_delay_seconds: 20            # pause between emails
+  discovery_queries: 20             # agent: max searches per discovery pass
+  agent_max_turns: 25               # agent: stop the session after this many tool calls
+
+sender:
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 465
+  security: "ssl"                   # ssl | starttls | none
+  username: ""                      # defaults to profile.email
+  password_env: "HL_SMTP_PASSWORD"  # checked first
+  keyring_service: "hire-lite-smtp" # then the OS keychain via `keyring`
+  imap_host: "imap.gmail.com"
+  imap_mailbox: "INBOX"             # Gmail users may prefer "[Gmail]/All Mail"
+  bounce_lookback_days: 7
+  bounce_wait_seconds: 60
+  template_text: "templates/email.txt"
+  template_html: ""                 # optional, e.g. "templates/email.html"
+  attachments: ["resume.pdf"]       # fixed files, git-ignored
+
+paths:
+  ledger: "ledger.jsonl"
+  bounces: "bounces.txt"
+  mx_cache: "mx_cache.json"
+  outbox: "outbox.jsonl"
+  results_dir: "results"
+  harvest_dir: "harvest"
+  dashboard: "dashboard.html"
+  sent_register: "sent_register.txt"
