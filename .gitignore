@@ -1,0 +1,35 @@
+# Personal data: never commit (root-level working files)
+/config.yaml
+/config.json
+.env
+/ledger.jsonl
+/ledger.jsonl.tmp
+/bounces.txt
+/mx_cache.json
+/sent_register.txt
+/outbox*
+/results/
+/harvest/
+/dashboard.html
+resume.*
+*.log
+*.eml
+# Also covers ledgers kept in another working directory inside the repo
+**/ledger.jsonl
+**/results/
+**/outbox*.jsonl
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
