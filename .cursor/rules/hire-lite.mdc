@@ -1,0 +1,12 @@
+---
+description: Hire Lite job-apply pipeline. Follow AGENTS.md on every run.
+alwaysApply: true
+---
+
+This repository is Hire Lite, an email-first job-apply pipeline.
+
+When the user asks to find roles, run a session, or send applications, follow AGENTS.md.
+Never invent a hiring email. Never edit the resume or templates/email.txt for a single job.
+Read command output and `python3 hl.py report` only. Do not dump the ledger.
+Do not commit config.yaml, .env, ledger.jsonl, harvest/, results/, outbox files, or resumes.
+Setup for a new user is in docs/BOTS.md.

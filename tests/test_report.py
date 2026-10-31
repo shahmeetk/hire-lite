@@ -35,7 +35,8 @@ def test_dashboard_is_static_and_self_contained(cfg, tmp_path):
     assert not re.search(r"<(script|link|img)[^>]+(src|href)=", html), "no external resources"
     data = json.loads(re.search(r"const D=(\[.*?\]);", html, re.S).group(1))
     assert len(data) == len(L.Ledger(cfg).values())
-    for label in ("Status (all leads)", "Emailed by lane", "Emailed by day", "Top skip reasons", 'id=q', 'id=fs', 'id=fl'):
+    for label in ("Status (all leads)", "Emailed by lane", "Emailed by day", "Top skip reasons",
+                  'id=q', 'id=fs', 'id=fl', 'id="insights"', 'data-dim="reason"'):
         assert label in html
 
 
